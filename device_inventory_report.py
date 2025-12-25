@@ -30,7 +30,7 @@ class DeviceInventoryReport(Script):
 
         # VALIDATION
         if not site and not rack:
-            raise AbortScript("Debe seleccionar al menos Site o Rack.")
+            raise AbortScript("You must select at least Site or Rack.")
 
         # QUERYS
         queryset = Device.objects.filter(status=status)
@@ -91,4 +91,4 @@ class DeviceInventoryReport(Script):
         c.save()
 
         # SUCCESS MESSAGE
-        self.log_success(f"PDF generado en {pdf_path}")
+        self.log_success(f"PDF generated at {pdf_path}")
