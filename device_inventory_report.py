@@ -1,6 +1,6 @@
 from extras.scripts import Script, ObjectVar, ChoiceVar
 from dcim.models import Site, Rack, Device
-from django.core.exceptions import ValidationError
+from utilities.exceptions import AbortScript
 import yaml
 import os
 
@@ -30,7 +30,7 @@ class DeviceInventoryReport(Script):
 
         # VALIDATION
         if not site and not rack:
-            raise ValidationError("Debe seleccionar al menos Site o Rack.")
+            raise AbortScript("Debe seleccionar al menos Site o Rack.")
 
         # QUERYS
         queryset = Device.objects.filter(status=status)
@@ -61,7 +61,7 @@ class DeviceInventoryReport(Script):
         from reportlab.lib.pagesizes import A4
         from reportlab.pdfgen import canvas
         from datetime import datetime
-        
+
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         human_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
