@@ -3,9 +3,7 @@ from dcim.models import Site, Rack, Device
 from django.core.exceptions import ValidationError
 import yaml
 import os
-from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
-from datetime import datetime
+
 
 # DEVICE INVENTORY REPORT SCRIPT
 class DeviceInventoryReport(Script):
@@ -60,6 +58,10 @@ class DeviceInventoryReport(Script):
             })
 
         # PDF GENERATION (SAFE)
+        from reportlab.lib.pagesizes import A4
+        from reportlab.pdfgen import canvas
+        from datetime import datetime
+        
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         human_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
