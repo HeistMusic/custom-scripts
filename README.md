@@ -1,8 +1,14 @@
-# Django Knowledge Base
+# NETBOX-DOCKER PRUEBA TECNICA 
 
-## Best Practices
+## NETBOX AND DOCKER SETUP
 
-Try to follow best practices when creating and maintaining projects, specifically around structure/architecture and naming conventions
+Para realizar esta prueba tecnica he decidido usar  [the official NetBox Docker Image][https://github.com/netbox-community/netbox-docker?tab=readme-ov-file]"the official NetBox Docker Image" y el docker descktop app(Windows)
+```
+https://github.com/netbox-community/netbox-docker?tab=readme-ov-file
+https://www.docker.com/products/docker-desktop/
+```
+
+###
 
 
 ### Project Structure
