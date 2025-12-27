@@ -24,13 +24,19 @@ class DeviceInventoryReport(Script):
     # MAIN EXECUTION METHOD
     def run(self, data, commit=True):
 
+        # IMPORTS
+        from reportlab.lib.pagesizes import A4
+        from reportlab.pdfgen import canvas
+        from datetime import datetime
+
+        # INPUT DATA
         site = data.get("site")
         rack = data.get("rack")
         status = data["status"]
 
         # VALIDATION
         if not site and not rack:
-            raise AbortScript("You must select at least Site or Rack.")
+            raise AbortScript("Debe seleccionar al menos Site o Rack.")
 
         # QUERYS
         queryset = Device.objects.filter(status=status)
@@ -58,10 +64,6 @@ class DeviceInventoryReport(Script):
             })
 
         # PDF GENERATION (SAFE)
-        from reportlab.lib.pagesizes import A4
-        from reportlab.pdfgen import canvas
-        from datetime import datetime
-
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         human_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
@@ -91,4 +93,7 @@ class DeviceInventoryReport(Script):
         c.save()
 
         # SUCCESS MESSAGE
-        self.log_success(f"PDF generated at {pdf_path}")
+        self.log_success(f"PDF generado en {pdf_path}")
+
+        # YAML OUTPUT (for NetBox Output field)
+        return yaml.dump(results, sort_keys=False)
